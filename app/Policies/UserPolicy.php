@@ -7,15 +7,17 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * 确定用户是否是本人
      *
+     * @param  \App\User  $currentUser
      * @param  \App\User  $user
-     * @param  \App\User  $user1
      * @return bool
      */
-    public function update(User $user, User $user1)
+    public function update(User $currentUser, User $user)
     {
-        return $user->id === $user1->id;
+        return $currentUser->id === $user->id;
     }
 }
