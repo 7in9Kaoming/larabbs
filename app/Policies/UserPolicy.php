@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -12,8 +12,8 @@ class UserPolicy
     /**
      * 确定用户是否是本人
      *
-     * @param  \App\User  $currentUser
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $currentUser
+     * @param  \App\Models\User  $user
      * @return bool
      */
     public function update(User $currentUser, User $user)
