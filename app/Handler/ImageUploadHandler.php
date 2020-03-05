@@ -10,6 +10,14 @@ class ImageUploadHandler
     protected $allowed_ext = ['png', 'jpg', 'jepg', 'gif'];
 
     // 图片保存
+    /**
+     * 图片保存
+     * @param          $file        上传的文件
+     * @param  string  $folder      保存目录
+     * @param  string  $file_prefix 保存文件前缀
+     * @param  int     $max_width   最大剪裁宽度
+     * @return string               保存文件URL
+     */
     public function save($file, $folder, $file_prefix, $max_width = false)
     {
         //构建文件存储规则，值如uploads/images/avatars/202003/03/
