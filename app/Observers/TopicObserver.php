@@ -16,6 +16,9 @@ class TopicObserver
 
     public function saving(Topic $topic)
     {
+        // 过滤文章内容中的不安全标签，防止XSS攻击
+        $topic->body = clean($topic->body, 'user_topic_body');
+
         $topic->excerpt = make_excerpt($topic->body);
     }
 
