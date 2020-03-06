@@ -14,6 +14,13 @@ class TranslateSlug implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /**
+     * 任务可以执行的最大秒数 (超时时间)。
+     *
+     * @var int
+     */
+    public $timeout = 30;
+
     protected $topic;
 
     /**
