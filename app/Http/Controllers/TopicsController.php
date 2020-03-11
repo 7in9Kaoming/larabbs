@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest;
 use App\Models\category;
 use Auth;
 use App\Handler\ImageUploadHandler;
+use Cache;
 
 class TopicsController extends Controller
 {
@@ -25,13 +26,15 @@ class TopicsController extends Controller
         return view('topics.index', compact('topics'));
     }
 
-    public function show(Request $request,Topic $topic)
+    public function show(Request $request,$topic_id)
     {
         // URL 矫正
         if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
             return redirect($topic->link(), 301);
         }
-
+        $topic = Cache::remember($request->url(), 30, function () use ($topic_id) {
+                    return Topic::with('user')->find($topic_id);
+                });
         return view('topics.show', compact('topic'));
     }
 
