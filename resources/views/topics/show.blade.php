@@ -45,20 +45,23 @@
 
           <div class="operate">
             <hr>
+            @can('update', $topic)
             <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
               <i class="far fa-edit"></i> 编辑
             </a>
+            @endcan
+            @can('destroy', $topic)
             <form action="{{ route('topics.destroy', $topic->id) }}" method="post"
-                    style="display: inline-block;"
-                    onsubmit="return confirm('您确定要删除吗？');">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-outline-secondary btn-sm">
-                  <i class="far fa-trash-alt"></i> 删除
-                </button>
-              </form>
+                  style="display: inline-block;"
+                  onsubmit="return confirm('您确定要删除吗？');">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-outline-secondary btn-sm">
+                <i class="far fa-trash-alt"></i> 删除
+              </button>
+            </form>
+            @endcan
           </div>
-
         </div>
       </div>
       {{-- 用户回复列表 --}}

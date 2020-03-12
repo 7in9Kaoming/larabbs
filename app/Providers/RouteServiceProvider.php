@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapSudoSuRoute();
     }
 
     /**
@@ -76,5 +76,20 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapSudoSuRoute()
+    {
+        Route::group([
+            'prefix' => 'sudosu',
+            'namespace' => 'VIACreative\SudoSu\Controllers',
+            'middleware' => ['web']
+        ], function () {
+            Route::post('/sudosu/login-as-user', 'SudoSuController@loginAsUser')
+                ->name('sudosu.login_as_user');
+
+            Route::post('/sudosu/return', 'SudoSuController@return')
+                ->name('sudosu.return');
+        });
     }
 }
