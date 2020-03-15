@@ -28,13 +28,13 @@ class TopicsController extends Controller
 
     public function show(Request $request,$topic_id)
     {
+        $topic = Cache::remember('topic-' . $topic_id, 30, function () use ($topic_id) {
+                    return Topic::with('user')->find($topic_id);
+                });
         // URL 矫正
         if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
             return redirect($topic->link(), 301);
         }
-        $topic = Cache::remember($request->url(), 30, function () use ($topic_id) {
-                    return Topic::with('user')->find($topic_id);
-                });
         return view('topics.show', compact('topic'));
     }
 
