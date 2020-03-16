@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
-  <title>@yield('title', 'LaraBBS')</title>
+  <title>@yield('title', 'LaraBBS') - {{ setting('site_name', 'Laravel') }}</title>
+  <meta name="description" content="@yield('description', setting('seo_description', 'LaraBBS 爱好者社区。'))" />
+  <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'LaraBBS,社区,论坛,开发者论坛'))" />
   <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
   @yield('SimditorStyle')
 </head>
